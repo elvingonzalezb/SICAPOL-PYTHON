@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block titulo %}
+SISTEMA SICAPOL
+{% endblock titulo %}
+
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="m-0 text-dark">Tipo de Persona</h1>
+                </div>
+                <div class="col-md-4">
+                    <a type="button" href="{% url 'registrar_tipopersona' %}" class="btn btn-primary"> REGISTRAR TIPO PERSONA</a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="table-stats order-table ov-h text-dark">
+            <table id="tabla_tipopersona" class="table">
+                <thead class="bg-dark">
+                    <tr>                                      
+                        <th>Codigo</th>
+                        <th>Tipo persona</th>
+                        <th>Usuario</th>
+                        <th class="text-right">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    {% for tipopersona in object_list %}
+                    <tr>
+                        <th scope="row">{{ tipopersona.id }}</th>
+                        <td>{{ tipopersona.tip_per }}</td>
+                        <td>{{ tipopersona.usuario }}</td>
+                        <td  class="text-right">
+                            <a href="{% url 'editar_tipopersona' tipopersona.id %}" class="btn btn-success btn-sm">Editar</a>
+                            <a href="{% url 'eliminar_tipopersona' tipopersona.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>  
+                    {% endfor %}              
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="creacion" role="dialog">
+    
+    </div>
+</div>
+
+{% endblock content %}

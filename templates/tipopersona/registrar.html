@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+{% block titulo %}
+Registrar de Tipo de personas
+{% endblock titulo %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header">
+            <strong>Registrar Usuario</strong>        
+        </div>
+        <div class="card-body card-block">
+            <form action="" method="POST" class="form-horizontal">
+                {% csrf_token %}
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        {{ form.tip_per.label }}
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{ form.tip_per }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        {{ form.usuario.label }}
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{ form.usuario }}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        {{ form.opc_car.label }}
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{ form.opc_car }}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        {{ form.fec_car.label }}
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{ form.fec_car }}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        {{ form.hor_car.label }}
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{ form.hor_car }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        {{ form.elimina.label }}
+                    </div>
+                    <div class="col-12 col-md-9">
+                        {{ form.elimina }}
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>    
+</div>
+
+{% endblock content %}

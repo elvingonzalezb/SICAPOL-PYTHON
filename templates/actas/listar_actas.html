@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block titulo %}
+Listado de actas policiales
+{% endblock titulo %}
+
+{% block content %}
+
+<h1>Actas Policiales</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nº Acta</th>
+            <th scope="col">Calle/Av.</th>
+            <th scope="col">Apto/casa</th>
+            <th scope="col">Punto ref.</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for acta in actas %}
+    <tr>
+        <th scope="row">{{ acta.corre_act }}</th>
+        <td>{{ acta.cal_ave }}</td>
+        <td>{{ acta.apt_cas }}</td>
+        <td>{{ acta.pto_ref }}</td>
+    </tr>  
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

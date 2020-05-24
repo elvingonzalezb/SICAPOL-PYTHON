@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+{% block titulo %}
+SISTEMA SICAPOL
+{% endblock titulo %}
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="m-0 text-dark">Tipo de Armas</h1>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <button type="button" onclick="abrirRegistrarModal('{% url 'registrar_tipo_arma' %}')" class="btn btn-primary"> REGISTRAR</button>
+                    </div>
+                </div>
+                
+            </div>
+            {% if tipoarmas %}
+            <div class="table-stats order-table ov-h text-dark">
+                <table id="tabla_usuarios" class="table">
+                    <thead class="bg-dark">
+                        <tr>                                      
+                            <th>Codigo</th>
+                            <th>Nombre tipo arma</th>                         
+                            <th>Estado</th>
+                            <th class="text-right">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {% for tipoarma in tipoarmas %}
+                        <tr>
+                            <th scope="row">{{ tipoarma.id }}</th>                           
+                            <td>{{ tipoarma.nom_tipo_arma }}</td>                                                    
+                            <td>{{ tipoarma.ind_activo }}</td>
+                            <td  class="text-right">
+                                <button onclick="abrirEditarModal('{% url 'editar_tipo_arma' tipoarma.id %}')" class="btn btn-danger btn-sm">Editar</button>
+                                <a href="{% url 'eliminar_tipo_arma' tipoarma.id %}" class="btn btn-success btn-sm">Eliminar</a>                                    
+                            </td>
+                        </tr>  
+                        {% endfor %}              
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="p-2">No existen tipo de armas registradas</p>
+        {% endif %}
+        </div>
+        <div class="modal fade" id="edicion" role="dialog"></div>
+        <div class="modal fade" id="creacion" role="dialog"></div>
+    </div> 
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function abrirRegistrarModal(url) {
+        $('#creacion').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+    function abrirEditarModal(url) {
+        $('#edicion').load(url, function () {
+            $(this).modal('show');
+        });
+    }  
+</script>
+{% endblock extrajs %}

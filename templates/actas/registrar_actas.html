@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block titulo %}
+Registrar de actas policiales
+{% endblock titulo %}
+
+{% block content %}
+
+<form method="POST">
+    <!--{{ form.as_p }}-->
+    {{ form.usuario.label }}
+    <button>Registrar</button>
+</form>
+
+
+{% endblock content %}

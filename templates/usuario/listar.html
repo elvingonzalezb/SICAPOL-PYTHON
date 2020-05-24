@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% block titulo %}
+SISTEMA SICAPOL
+{% endblock titulo %}
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="m-0 text-dark">Listado de usuarios</h1>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <button type="button" onclick="abrir_modal_creacion('{% url 'registrar_usuario' %}')" class="btn btn-primary"> REGISTRAR</button>
+                    </div>
+                </div>
+                
+            </div>
+            {% if usuarios %}
+            <div class="table-stats order-table ov-h text-dark">
+                <table id="tabla_usuarios" class="table">
+                    <thead class="bg-dark">
+                        <tr>                                      
+                            <th>Codigo</th>
+                            <th>Nombre usuario</th>
+                            <th>Login</th>
+                            <th>Password</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th class="text-right">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {% for usuario in usuarios %}
+                        <tr>
+                            <th scope="row">{{ usuario.id }}</th>
+                            <td>{{ usuario.nombre }}</td>
+                            <td>{{ usuario.login }}</td>
+                            <td>{{ usuario.password }}</td>
+                            <td>{{ usuario.tipo }}</td>                           
+                            <td>{{ usuario.elimina }}</td>
+                            <td  class="text-right">
+                                <button onclick="abrir_modal_edicion('{% url 'editar_usuario' usuario.id %}')" class="btn btn-danger btn-sm">Editar</button>
+                                <a href="{% url 'eliminar_usuario' usuario.id %}" class="btn btn-success btn-sm">Eliminar</a>                                    
+                            </td>
+                        </tr>  
+                        {% endfor %}              
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="p-2">No existen usuarios registrados</p>
+        {% endif %}
+        </div>
+        <div class="modal fade" id="edicion" role="dialog"></div>
+        <div class="modal fade" id="creacion" role="dialog"></div>
+    </div> 
+{% endblock content %}
+{% block extrajs %}
+<script type="text/javascript">
+//para evitar conflicto declaro una variable dolar de jquery
+    var $ = jQuery.noConflict();
+    function abrir_modal_edicion(url) {
+        $('#edicion').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+    function abrir_modal_creacion(url) {
+        $('#creacion').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock extrajs %}
